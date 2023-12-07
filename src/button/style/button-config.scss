@@ -1,0 +1,57 @@
+//所有不同type
+@import '../../style/variable.scss';
+
+$type:(
+  primary:(
+    color:$s-light-text,
+    background-color:$s-primary
+  ),
+  secondary:(
+    color:$s-text,
+    background-color:$s-block,
+    border-color:$s-line
+  ),
+  text:(
+    padding:0,
+    color:$s-brand-active,
+
+  )
+
+);
+
+$psedudo:(
+    primary:(
+        hover:(
+            background-color: $s-primary-hover
+        ),
+        focus:(
+            background-color: $s-primary-hover
+        )
+    ),
+    secondary:(
+        hover:(
+            border-color: $s-form-control-line-active,
+            color: $s-brand-active
+        ),
+        focus:(
+            border-color: $s-form-control-line-active,
+            color: $s-brand-active
+        ),
+        active:(
+            border-color: $s-form-control-line-active,
+            color: $s-brand-active
+        )
+    ),
+    text:(
+        hover:(
+            color: $s-brand-active
+        ),
+        focus:(
+            color: $s-brand-active
+        ),
+        active:(
+            color: $s-brand-active
+        )
+
+    )
+)

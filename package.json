@@ -1,14 +1,17 @@
 {
-  "name": "my-element",
+  "name": "SUI",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "type":"module",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .js,.ts,.tsx,.vue --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "docs:build": "vitepress build docs",
+    "docs:dev": "vitepress dev docs",
+    "docs:serve": "vitepress serve docs"
   },
   "dependencies": {
     "vue": "^3.2.47"
@@ -18,15 +21,20 @@
     "@typescript-eslint/parser": "^5.60.1",
     "@vitejs/plugin-vue": "^4.1.0",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
+    "autoprefixer": "^10.4.16",
     "eslint": "^8.44.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.15.1",
     "husky": ">=6",
     "lint-staged": ">=10",
+    "postcss": "^8.4.31",
     "prettier": "^2.8.8",
+    "sass": "^1.69.5",
+    "tailwindcss": "^3.3.5",
     "typescript": "^5.0.2",
     "vite": "^4.3.9",
+    "vitepress": "^1.0.0-beta.3",
     "vue-tsc": "^1.4.2"
   },
   "lint-staged": {

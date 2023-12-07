@@ -1,0 +1,17 @@
+//变量
+//定义主题变量
+$s-border-radius:var(--s-border-radius,2px);//一般圆角
+$s-font-size-md:var(--s-font-size-md,12px);//
+$s-animation-duration-slow:var(--s-animation-duration-slow,300ms);
+$s-animation-ease-in-out-smooth:var(--s-animation-ease-in-out-smooth,cubic-bezier(0.654,0.045,0.355,1));
+$s-light-text:var(--s-light-text,#ffffff);
+$s-primary:var(--s-primary,#5e7ce0);
+$s-primary-hover:var(--s-primary-hover,#7693f5);
+$s-primary-active:var(--s-primary-active,#344899);
+$s-text:var(--s-text,#252b3a);
+$s-block:var(--s-block,#ffffff);
+$s-line:var(--s-line,#adb0b8);
+$s-form-control-line-active:var(--s-form-control-line-active,#5e7ce0);
+$s-board-acitve-focus:var(--s-board-active-focus,#344899);
+$s-brand-active:var(--s-brand-active,#526ecc);
+$s-brand-active-focus:var(--s-brand-active-focus,#344899);
