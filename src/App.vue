@@ -8,7 +8,8 @@ import Test from './components/Test'
   <!-- <Test>
     <template v-slot:title="scope"><h3 style="color:red">我是title {{ scope }}</h3></template>
   </Test> -->
-  <SButton type="primary">确定</SButton>
+  <SButton type="primary" size="medium">确定</SButton>
+  <SButton type="primary" size="large">你好</SButton>
 </template>
 
 <style scoped>

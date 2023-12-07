@@ -9,7 +9,10 @@
  @include button-variant(button-config.$type);
 
  //导入hover等伪类
- @include button-variant(button-config.$psedudo,true)
+ @include button-variant(button-config.$psedudo,true);
+
+  //导入size
+  @include button-variant(button-config.$size)
 
 
 //  &.s-btn--primary{
