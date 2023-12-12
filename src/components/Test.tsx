@@ -37,11 +37,11 @@ export default defineComponent({
         <div>
           <div>{slots.title && slots.title(count.value)}</div>
           <div onClick={withModifiers(increseMent, ['self'])}>
-            test: {count.value}{' '}
+            test:{count.value}
           </div>
           <form>
             取值系统:
-            <input v-model={count.value} type="text" v-focus />
+            {/* <input v-model={count.value} type="text" v-focus /> */}
           </form>
           <div>{condition.value ? <span>A</span> : <span>B</span>}</div>
           <ul>{arr}</ul>

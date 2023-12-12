@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
 import Test from './components/Test'
+const handleConfirm = () => {
+  console.log('confirm')
+}
 </script>
 
 <template>
@@ -8,8 +11,10 @@ import Test from './components/Test'
   <!-- <Test>
     <template v-slot:title="scope"><h3 style="color:red">我是title {{ scope }}</h3></template>
   </Test> -->
-  <SButton type="primary" size="medium">确定</SButton>
-  <SButton type="primary" size="large">你好</SButton>
+  <SButton type="primary" size="medium" block>确定</SButton>
+  <SButton type="primary" size="large" disabled @click="handleConfirm">
+    你好
+  </SButton>
 </template>
 
 <style scoped>

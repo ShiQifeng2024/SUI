@@ -9,6 +9,7 @@ $s-primary:var(--s-primary,#5e7ce0);
 $s-primary-hover:var(--s-primary-hover,#7693f5);
 $s-primary-active:var(--s-primary-active,#344899);
 $s-text:var(--s-text,#252b3a);
+$s-disabled-text:var(--s-disabled-text,#8891a7);
 $s-block:var(--s-block,#ffffff);
 $s-line:var(--s-line,#adb0b8);
 $s-form-control-line-active:var(--s-form-control-line-active,#5e7ce0);
@@ -18,3 +19,6 @@ $s-brand-active-focus:var(--s-brand-active-focus,#344899);
 $s-font-size-sm:var(--s-font-size-sm,10px);
 $s-font-size-md:var(--s-font-size-md,12px);
 $s-font-size-lg:var(--s-font-size-lg,12px);
+$s-primary-disabled:var(--s-primary-disabled,#879ada);
+$s-disabled-bg:var(--s-disabled-bg,#c2cce5);
+$s-disabled-line:var(--s-disabled-line,#a9b0c0)
