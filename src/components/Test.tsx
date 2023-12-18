@@ -41,7 +41,7 @@ export default defineComponent({
           </div>
           <form>
             取值系统:
-            {/* <input v-model={count.value} type="text" v-focus /> */}
+            <input v-model={count.value} type="text" v-focus />
           </form>
           <div>{condition.value ? <span>A</span> : <span>B</span>}</div>
           <ul>{arr}</ul>
