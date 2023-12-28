@@ -2,7 +2,6 @@
   "name": "SUI",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
@@ -12,9 +11,11 @@
     "docs:build": "vitepress build docs",
     "docs:dev": "vitepress dev docs",
     "docs:serve": "vitepress serve docs",
-    "test":"vitest"
+    "test": "vitest",
+    "build:components": "node ./scripts/build.cjs"
   },
   "dependencies": {
+    "fs-extra": "^11.2.0",
     "vue": "^3.2.47"
   },
   "devDependencies": {
