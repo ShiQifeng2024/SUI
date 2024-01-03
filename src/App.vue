@@ -13,7 +13,7 @@ const handleConfirm = () => {
   </Test> -->
   <SButton type="primary" size="medium" block>确定</SButton>
   <SButton type="primary" size="large" disabled @click="handleConfirm">
-    你好
+    <span style="color: red">元旦快乐</span>
   </SButton>
 </template>
 

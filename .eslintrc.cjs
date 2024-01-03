@@ -31,5 +31,6 @@ module.exports = {
         "vue"
     ],
     "rules": {
+        "@typescript-eslint/no-var-requires":0
     }
 }

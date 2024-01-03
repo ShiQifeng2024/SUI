@@ -12,7 +12,7 @@
     "docs:dev": "vitepress dev docs",
     "docs:serve": "vitepress serve docs",
     "test": "vitest",
-    "build:components": "node ./scripts/build.cjs"
+    "build:components": "node ./scripts/build.js"
   },
   "dependencies": {
     "fs-extra": "^11.2.0",

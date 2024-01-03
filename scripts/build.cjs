@@ -11,7 +11,7 @@ const fs=require("fs")
 //基础配置
 const baseConfig=defineConfig({
     configFile:false,
-    putlicDir:false,
+    publicDir:false,
     plugins:[vue(),vueJsx()]
 })
 //入口文件设置
