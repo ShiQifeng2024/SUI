@@ -1,5 +1,6 @@
 import * as inquirer from 'inquirer'
 import { red } from 'kolorist'
+import createComponent from '../shared/create-component'
 const CREATE_TYPES = ['component', 'lib-entry']
 
 //组件分类
@@ -78,8 +79,4 @@ export const onCreate = async (args = { type: '' }) => {
         break
     }
   } catch (error) {}
-}
-
-function createComponent(info) {
-  console.log(info)
 }
