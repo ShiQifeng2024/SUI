@@ -1,84 +1,14 @@
-import { defineComponent, toRefs, ref, computed } from 'vue'
+import { defineComponent, toRefs } from 'vue'
 import { IInnerTreeNode, TreeProps, treeProps } from './tree-types'
-import { generateInnerTree } from './utils'
 import '../style/tree.scss'
-const data = [
-  {
-    label: 'docs',
-    id: 'node-1',
-    level: 1
-  },
-  {
-    label: 'packages',
-    id: 'node-2',
-    expanded: true,
-    level: 1,
-    children: [
-      {
-        label: 'vite',
-        id: 'node-2-1',
-        expanded: true,
-        level: 2,
-        children: [
-          {
-            label: 'README.md',
-            id: 'node-2-1-1',
-            expanded: true,
-            level: 3
-          }
-        ]
-      }
-    ]
-  },
-  {
-    label: 'ReadMe',
-    id: 'node-3',
-    level: 1
-  }
-]
+import { useTree } from './composables/useTree'
 
 export default defineComponent({
   name: 'STree',
   props: treeProps,
   setup(props: TreeProps) {
     const { data } = toRefs(props)
-    //console.log(generateInnerTree(data.value))
-    const innerData = ref(generateInnerTree(data.value))
-    const toogleNode = (node: IInnerTreeNode) => {
-      //还要影响子节点
-      //
-      const cur = innerData.value.find(item => item.id == node.id)
-      if (cur) {
-        cur.expanded = !cur.expanded
-      }
-    }
-
-    //展开的节点列表
-    const expandedTree = computed(() => {
-      let excludedNodes: IInnerTreeNode[] = []
-      const result = []
-      //循环列表，找出那些!expanded的节点
-      const getChildren = (obj: IInnerTreeNode): any[] => {
-        let result: any = []
-        for (const item of innerData.value) {
-          if (item.parentId == obj.id) {
-            result.push(item)
-            const sub = getChildren(item)
-            result = result.concat(sub)
-          }
-        }
-        return result
-      }
-      for (const item of innerData.value) {
-        if (excludedNodes.includes(item)) continue
-        if (item.expanded !== true) {
-          excludedNodes = excludedNodes.concat(getChildren(item))
-        }
-        result.push(item)
-      }
-
-      return result
-    })
+    const { toogleNode, expandedTree } = useTree(data)
     return () => {
       return (
         <div class="s-tree">
