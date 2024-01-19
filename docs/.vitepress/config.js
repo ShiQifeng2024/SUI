@@ -1,11 +1,13 @@
-import { DefaultTheme, defineConfig } from 'vitepress'
-const sidebar:DefaultTheme.Sidebar={
+import {  defineConfig } from 'vitepress'
+// import { demoblockPlugin, demoblockVitePlugin } from "vitepress-theme-demoblock"
+import vueJsx from '@vitejs/plugin-vue-jsx'
+const sidebar={
     "/":[
-        {text:"快速开始",link:"/"},
         {
             text:'通用',
             items:[
-                {text:'Button 按钮',link:'/components/button'}
+                {text:'Button 按钮',link:'/components/button.md'},
+                {text:'树形结构',link:'/components/tree/index.md'}
             ]
         },
         {
@@ -34,6 +36,9 @@ const config={
 
 
 export default defineConfig({
+
+
+
     // title: '浏览器标题',
     // description: '浏览器描述',
     // lang: 'cn-ZH',
@@ -41,5 +46,13 @@ export default defineConfig({
     // lastUpdated: true,
     themeConfig: {
       sidebar
+    },
+    markdown:{
+        config:(md)=>{
+            //使用markdown插件做扩展
+        },
+    },
+    vite: {
+        plugins: [vueJsx()]
     }
   })

@@ -37,7 +37,7 @@ export default function createComponent(meta: CompentMeta) {
   console.log(lightBlue(`✅组件${name}目录创建完毕`))
   console.log(lightGreen(`✅组件目录${componentDir}目录创建完毕`))
 
-  const typesFilePath = resolve(compsSrcDir, name) + '-type.ts'
+  const typesFilePath = resolve(compsSrcDir, name) + '-types.ts'
   writeFileSync(typesFilePath, genTypesTemplate(name), WriteFileOptions)
   console.log(lightGreen(`✅组件类型${name}声明文件创建完毕`))
 
