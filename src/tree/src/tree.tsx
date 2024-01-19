@@ -2,23 +2,40 @@ import { defineComponent, toRefs } from 'vue'
 import { IInnerTreeNode, TreeProps, treeProps } from './tree-types'
 import '../style/tree.scss'
 import { useTree } from './composables/useTree'
+const NODE_HEIGHT = 32
+const NODE_INDENT = 24
 
 export default defineComponent({
   name: 'STree',
   props: treeProps,
   setup(props: TreeProps) {
     const { data } = toRefs(props)
-    const { toogleNode, expandedTree } = useTree(data)
+    const { toogleNode, expandedTree, getChildren } = useTree(data)
     return () => {
       return (
         <div class="s-tree">
           {expandedTree?.value?.map(treeNode => (
             <div
-              class="s-tree-node"
+              class="s-tree-node hover:bg-slate-300 relative leading-8"
               style={{
-                paddingLeft: `${24 * (treeNode.level - 1)}px`
+                paddingLeft: `${NODE_INDENT * (treeNode.level - 1)}px`
               }}
             >
+              {/*连接线*/}
+              {!treeNode.isLeaf && treeNode.expanded && (
+                <span
+                  class="s-tree-node_vline absolute w-px bg-gray-300"
+                  style={{
+                    height: `${NODE_HEIGHT * getChildren(treeNode).length}px`,
+                    left: `${
+                      NODE_INDENT * (treeNode.level - 1) +
+                      Math.ceil(NODE_INDENT / 2)
+                    }px`,
+                    top: `${NODE_HEIGHT}px`
+                  }}
+                ></span>
+              )}
+
               {/*关闭折叠的标签*/}
               {/*判断是否是叶子节点*/}
               {treeNode.isLeaf ? (
