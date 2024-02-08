@@ -8,7 +8,7 @@ const NODE_INDENT = 24
 export default defineComponent({
   name: 'STree',
   props: treeProps,
-  setup(props: TreeProps) {
+  setup(props: TreeProps, { slots }) {
     const { data, checkable } = toRefs(props)
     const { toogleNode, expandedTree, getChildren, toogleCheckNode } =
       useTree(data)
@@ -41,6 +41,8 @@ export default defineComponent({
               {/*判断是否是叶子节点*/}
               {treeNode.isLeaf ? (
                 <span style={{ display: 'inline-block', width: '25px' }}></span>
+              ) : slots.icon ? (
+                slots.icon({ nodeData: treeNode, toogleNode })
               ) : (
                 <svg
                   style={{
@@ -74,7 +76,7 @@ export default defineComponent({
                 />
               )}
               {/*标签*/}
-              {treeNode.label}
+              {slots.content ? slots.content(treeNode) : treeNode.label}
             </div>
           ))}
         </div>
