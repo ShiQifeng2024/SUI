@@ -129,7 +129,6 @@ const data=ref(
       label:'docs',
       id:'node-1',
       expanded:true,
-      checked:true,
       children:[
         {
             id:'node-1-1',
