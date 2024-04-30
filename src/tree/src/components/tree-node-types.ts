@@ -12,6 +12,8 @@ export type TreeUtils = {
   toogleNode: (treeNode: IInnerTreeNode) => void
   getChildren: (treeNode: IInnerTreeNode) => IInnerTreeNode[]
   toogleCheckNode: (treeNode: IInnerTreeNode) => void
+  append: (parent: IInnerTreeNode, node: IInnerTreeNode) => void
+  remove: (treeNode: IInnerTreeNode) => void
 }
 
 export type TreeNodeProps = ExtractPropTypes<typeof treeNodeProps>

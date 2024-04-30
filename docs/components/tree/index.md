@@ -115,7 +115,7 @@ const data = [
 
 <!-- </script> -->
 
-<STree :data="data" checkable>
+<STree :data="data" checkable operable>
   <template v-slot:content="treeNode">
      <span>{{treeNode.label}}</span>
   </template>

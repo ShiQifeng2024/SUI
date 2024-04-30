@@ -13,7 +13,9 @@ export default defineComponent({
     provide('TREE_UTILS', {
       toogleNode: treeData.toogleNode,
       toogleCheckNode: treeData.toogleCheckNode,
-      getChildren: treeData.getChildren
+      getChildren: treeData.getChildren,
+      append: treeData.append,
+      remove: treeData.remove
     })
     return () => {
       return (
