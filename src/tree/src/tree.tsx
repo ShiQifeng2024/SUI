@@ -9,7 +9,7 @@ export default defineComponent({
   props: treeProps,
   setup(props: TreeProps, { slots }) {
     const { data } = toRefs(props)
-    const treeData = useTree(data)
+    const treeData = useTree(data.value)
     provide('TREE_UTILS', {
       toogleNode: treeData.toogleNode,
       toogleCheckNode: treeData.toogleCheckNode,
