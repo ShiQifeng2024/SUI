@@ -10,8 +10,14 @@ export default defineComponent({
   setup(props: TreeNodeProps, { slots }) {
     const { checkable, treeNode, operable } = toRefs(props)
     //通过inject
-    const { toogleNode, getChildren, toogleCheckNode, append, remove } =
-      inject<TreeUtils>('TREE_UTILS') as TreeUtils
+    const {
+      toogleNode,
+      getChildren,
+      toogleCheckNode,
+      append,
+      remove,
+      getChildrenVisible
+    } = inject<TreeUtils>('TREE_UTILS') as TreeUtils
     //创建一个开关变量
     const isShow = ref(false)
     const toogleOperate = () => {
@@ -37,7 +43,9 @@ export default defineComponent({
             <span
               class="s-tree-node_vline absolute w-px bg-gray-300"
               style={{
-                height: `${NODE_HEIGHT * getChildren(treeNode.value).length}px`,
+                height: `${
+                  NODE_HEIGHT * getChildrenVisible(treeNode.value).length
+                }px`,
                 left: `${
                   NODE_INDENT * (treeNode.value.level - 1) +
                   Math.ceil(NODE_INDENT / 2)
@@ -103,6 +111,8 @@ export default defineComponent({
               </svg>
             </span>
           )}
+          {/*loading状态*/}
+          {treeNode.value.loading && slots.loading!()}
         </div>
       )
     }

@@ -11,6 +11,7 @@ export const treeNodeProps = {
 export type TreeUtils = {
   toogleNode: (treeNode: IInnerTreeNode) => void
   getChildren: (treeNode: IInnerTreeNode) => IInnerTreeNode[]
+  getChildrenVisible: (treeNode: IInnerTreeNode) => IInnerTreeNode[]
   toogleCheckNode: (treeNode: IInnerTreeNode) => void
   append: (parent: IInnerTreeNode, node: IInnerTreeNode) => void
   remove: (treeNode: IInnerTreeNode) => void

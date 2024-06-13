@@ -21,7 +21,10 @@ export function generateInnerTree(
       path.pop()
       return arr
     } else {
-      o.isLeaf = true
+      if (o.isLeaf === undefined) {
+        o.isLeaf = true
+      }
+
       return prev.concat(o)
     }
   }, [] as IInnerTreeNode[])

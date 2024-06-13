@@ -2,7 +2,7 @@
 ## 这是一个按钮
 
 
-<SButton type="primary" size="large" disabled>
+<SButton type="primary" size="large" >
     <span>元旦快乐</span>
 </SButton>
 

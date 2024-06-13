@@ -32,6 +32,8 @@ export interface IInnerTreeNode extends ITreeNode {
   parentId?: string
   level: number
   isLeaf?: boolean
+  loading?: boolean //节点显示是否加载中
+  childNodeCount?: number //该节点子节点的数量
 }
 
 export type TreeProps = ExtractPropTypes<typeof treeProps>

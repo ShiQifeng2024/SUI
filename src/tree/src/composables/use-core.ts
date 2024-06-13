@@ -18,6 +18,23 @@ export function useCore(innerData: Ref<IInnerTreeNode[]>): IUseCore {
     }
     return result
   }
+  const getChildrenVisible = (obj: IInnerTreeNode, flag = true) => {
+    let result: IInnerTreeNode[] = []
+    for (const item of innerData.value) {
+      if (obj.expanded === true) {
+        if (item.parentId == obj.id) {
+          result.push(item)
+          //是否要递归
+          if (flag) {
+            //
+            const sub = getChildrenVisible(item, flag)
+            result = result.concat(sub)
+          }
+        }
+      }
+    }
+    return result
+  }
   const getChildrenExpanded = (obj: IInnerTreeNode) => {
     return getChildren(obj, false)
   }
@@ -41,10 +58,17 @@ export function useCore(innerData: Ref<IInnerTreeNode[]>): IUseCore {
     return innerData.value.findIndex(item => item.id === node.id)
   }
 
+  const getNode = (node: IInnerTreeNode) => {
+    if (!node) return undefined
+    return innerData.value.find(item => item.id === node.id)
+  }
+
   return {
     getChildren,
     expandedTree,
     getIndex,
-    getChildrenExpanded
+    getChildrenExpanded,
+    getNode,
+    getChildrenVisible
   }
 }

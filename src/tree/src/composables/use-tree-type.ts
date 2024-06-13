@@ -1,5 +1,5 @@
 import { ComputedRef, Ref } from 'vue'
-import { IInnerTreeNode } from '../tree-types'
+import { IInnerTreeNode, ITreeNode } from '../tree-types'
 //和树相关的方法
 export type IUseCore = {
   getChildren: (
@@ -9,6 +9,11 @@ export type IUseCore = {
   getIndex: (treeNode: IInnerTreeNode) => number
   expandedTree: ComputedRef<IInnerTreeNode[]>
   getChildrenExpanded: (treeNode: IInnerTreeNode) => IInnerTreeNode[]
+  getNode: (node: IInnerTreeNode) => IInnerTreeNode | undefined
+  getChildrenVisible: (
+    treeNode: IInnerTreeNode,
+    recurecursive?: boolean
+  ) => IInnerTreeNode[]
 }
 //展开移除相关
 export type IUseToogle = {
@@ -21,6 +26,15 @@ export type IUseCheck = {
 export type IUseOperate = {
   append: (parent: IInnerTreeNode, node: IInnerTreeNode) => void
   remove: (node: IInnerTreeNode) => void
+}
+
+export type IUseLazyLoad = {
+  lazyLoadNodes: (node: IInnerTreeNode) => void
+}
+
+export type LazyNodeResult = {
+  node: IInnerTreeNode
+  treeItems: ITreeNode[]
 }
 
 export type TreeUtils = {

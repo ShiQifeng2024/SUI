@@ -1,4 +1,4 @@
-import { defineComponent, provide, toRefs } from 'vue'
+import { defineComponent, provide, toRefs, SetupContext } from 'vue'
 import { TreeProps, treeProps } from './tree-types'
 import '../style/tree.scss'
 import { useTree } from './composables/useTree'
@@ -7,15 +7,18 @@ import STreeNodeToogle from './components/tree-node-toggle'
 export default defineComponent({
   name: 'STree',
   props: treeProps,
-  setup(props: TreeProps, { slots }) {
+  emits: ['lazy-load'],
+  setup(props: TreeProps, context: SetupContext) {
     const { data } = toRefs(props)
-    const treeData = useTree(data.value)
+    const slots = context.slots
+    const treeData = useTree(data.value, context)
     provide('TREE_UTILS', {
       toogleNode: treeData.toogleNode,
       toogleCheckNode: treeData.toogleCheckNode,
       getChildren: treeData.getChildren,
       append: treeData.append,
-      remove: treeData.remove
+      remove: treeData.remove,
+      getChildrenVisible: treeData.getChildrenVisible
     })
     return () => {
       return (
@@ -41,6 +44,13 @@ export default defineComponent({
                         treeData.toogleNode(treeNode)
                       }}
                     ></STreeNodeToogle>
+                  )
+                },
+                loading: () => {
+                  return slots.loading ? (
+                    slots.loading({ nodeData: treeNode })
+                  ) : (
+                    <span class="ml-1">loading...</span>
                   )
                 }
               }}
