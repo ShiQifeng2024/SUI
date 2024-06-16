@@ -11,14 +11,19 @@ export default defineComponent({
   setup(props: TreeProps, context: SetupContext) {
     const { data } = toRefs(props)
     const slots = context.slots
-    const treeData = useTree(data.value, context)
+    const treeData = useTree(data.value, props, context)
     provide('TREE_UTILS', {
       toogleNode: treeData.toogleNode,
       toogleCheckNode: treeData.toogleCheckNode,
       getChildren: treeData.getChildren,
       append: treeData.append,
       remove: treeData.remove,
-      getChildrenVisible: treeData.getChildrenVisible
+      getChildrenVisible: treeData.getChildrenVisible,
+      onDragstart: treeData.onDragstart,
+      onDragover: treeData.onDragover,
+      onDrop: treeData.onDrop,
+      onDragleave: treeData.onDragleave,
+      onDragend: treeData.onDragend
     })
     return () => {
       return (

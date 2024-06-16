@@ -16,8 +16,27 @@ export default defineComponent({
       toogleCheckNode,
       append,
       remove,
-      getChildrenVisible
+      getChildrenVisible,
+      onDragstart,
+      onDragover,
+      onDrop,
+      onDragleave,
+      onDragend
     } = inject<TreeUtils>('TREE_UTILS') as TreeUtils
+
+    const { dragdrop } = toRefs(props)
+    console.log(dragdrop.value, 'xx')
+    let dragdropProps = {}
+    if (dragdrop.value) {
+      dragdropProps = {
+        draggable: true,
+        onDragstart: (event: DragEvent) => onDragstart?.(event, treeNode.value),
+        onDragover: (event: DragEvent) => onDragover?.(event),
+        onDragleave: (event: DragEvent) => onDragleave?.(event),
+        onDrop: (event: DragEvent) => onDrop?.(event, treeNode.value),
+        onDragend: (event: DragEvent) => onDragend?.(event)
+      }
+    }
     //创建一个开关变量
     const isShow = ref(false)
     const toogleOperate = () => {
@@ -55,7 +74,11 @@ export default defineComponent({
             ></span>
           )}
 
-          <div class="s-tree__node--content" draggable={!!props.dragdrop}>
+          <div
+            class="s-tree__node--content"
+            draggable={!!props.dragdrop}
+            {...dragdropProps}
+          >
             {/*关闭折叠的标签*/}
             {/*判断是否是叶子节点*/}
             {treeNode.value.isLeaf ? (

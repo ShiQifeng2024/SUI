@@ -39,24 +39,24 @@ export type LazyNodeResult = {
 }
 
 //拖拽
-export type IDragdrop = boolean | IDrapType
+export type IDragdrop = boolean | IDropType
 
-export interface IDrapType {
+export interface IDropType {
   dropPrev?: boolean
   dropNext?: boolean
   dropInner?: boolean
 }
 
 export interface IUseDragdrop {
-  onDragStart: (event: DragEvent, treeNode: IInnerTreeNode) => void
-  onDragOver: (event: DragEvent) => void
-  onDragLeave: (event: DragEvent) => void
+  onDragstart: (event: DragEvent, treeNode: IInnerTreeNode) => void
+  onDragover: (event: DragEvent) => void
+  onDragleave: (event: DragEvent) => void
   onDrop: (event: DragEvent, treeNode: IInnerTreeNode) => void
-  onDragEnd: (event: DragEvent) => void
+  onDragend: (event: DragEvent) => void
 }
 
 export interface DragState {
-  dropType?: keyof Required<IDrapType>
+  dropType?: keyof Required<IDropType>
   draggingNode?: HTMLElement | null
   draggingTreeNode?: IInnerTreeNode | null
 }
@@ -66,4 +66,5 @@ export type TreeUtils = {
 } & IUseCore &
   IUseToogle &
   IUseCheck &
-  IUseOperate
+  IUseOperate &
+  IUseDragdrop

@@ -15,6 +15,11 @@ export type TreeUtils = {
   toogleCheckNode: (treeNode: IInnerTreeNode) => void
   append: (parent: IInnerTreeNode, node: IInnerTreeNode) => void
   remove: (treeNode: IInnerTreeNode) => void
+  onDragstart: (event: DragEvent, treeNode: IInnerTreeNode) => void
+  onDragover: (event: DragEvent) => void
+  onDragleave: (event: DragEvent) => void
+  onDrop: (event: DragEvent, treeNode: IInnerTreeNode) => void
+  onDragend: (event: DragEvent) => void
 }
 
 export type TreeNodeProps = ExtractPropTypes<typeof treeNodeProps>

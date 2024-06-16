@@ -240,7 +240,7 @@ const lazyLoad = (node, cb) => {
 
 
 
-<STree :data="data" dragdrop>
+<STree :data="data" :dragdrop="true">
 </STree>
 
 
