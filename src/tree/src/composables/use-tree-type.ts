@@ -10,6 +10,7 @@ export type IUseCore = {
   expandedTree: ComputedRef<IInnerTreeNode[]>
   getChildrenExpanded: (treeNode: IInnerTreeNode) => IInnerTreeNode[]
   getNode: (node: IInnerTreeNode) => IInnerTreeNode | undefined
+  getParent: (node: IInnerTreeNode) => IInnerTreeNode | undefined
   getChildrenVisible: (
     treeNode: IInnerTreeNode,
     recurecursive?: boolean
@@ -35,6 +36,29 @@ export type IUseLazyLoad = {
 export type LazyNodeResult = {
   node: IInnerTreeNode
   treeItems: ITreeNode[]
+}
+
+//拖拽
+export type IDragdrop = boolean | IDrapType
+
+export interface IDrapType {
+  dropPrev?: boolean
+  dropNext?: boolean
+  dropInner?: boolean
+}
+
+export interface IUseDragdrop {
+  onDragStart: (event: DragEvent, treeNode: IInnerTreeNode) => void
+  onDragOver: (event: DragEvent) => void
+  onDragLeave: (event: DragEvent) => void
+  onDrop: (event: DragEvent, treeNode: IInnerTreeNode) => void
+  onDragEnd: (event: DragEvent) => void
+}
+
+export interface DragState {
+  dropType?: keyof Required<IDrapType>
+  draggingNode?: HTMLElement | null
+  draggingTreeNode?: IInnerTreeNode | null
 }
 
 export type TreeUtils = {
