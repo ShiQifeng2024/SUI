@@ -240,7 +240,7 @@ const lazyLoad = (node, cb) => {
 
 
 
-<STree :data="data" :dragdrop="true">
+<STree :data="data" :height="300">
 </STree>
 
 
@@ -248,56 +248,63 @@ const lazyLoad = (node, cb) => {
 <script setup>
 import {ref} from 'vue'
    
+// const data=ref(
+// [
+//   {
+//       label:'docs',
+//       id:'node-1',
+//       expanded:true,
+//       children:[
+//         {
+//             id:'node-1-1',
+//             label:'vitepress',
+//             expanded:true
+//         },
+//         {
+//             label:'components',
+//             id:'node-1-2',
+//             expanded:true,
+//             children:[
+//                 {
+//                     id:'node-1-2-1',
+//                     label:'tree'
+//                 }
+//             ]
+//         }
+//       ]
+//   },
+//   {
+//       label:'packages',
+//       id:'node-2',
+//       expanded:true,
+//       children:[
+//           {
+//               label:'vite',
+//               id:'node-2-1',
+//               expanded:true,
+//               children:[
+//                   {
+//                       label:'README.md',
+//                       id:'node-2-1-1',
+//                       expanded:true,
+//                   }
+//               ]
+//           },
+//       ]
+//   },
+//   {
+//       label:'ReadMe',
+//       id:'node-3',
+//       expanded:true
+//   }
+// ]
+// )
 const data=ref(
-[
-  {
-      label:'docs',
-      id:'node-1',
-      expanded:true,
-      children:[
-        {
-            id:'node-1-1',
-            label:'vitepress',
-            expanded:true
-        },
-        {
-            label:'components',
-            id:'node-1-2',
-            expanded:true,
-            children:[
-                {
-                    id:'node-1-2-1',
-                    label:'tree'
-                }
-            ]
-        }
-      ]
-  },
-  {
-      label:'packages',
-      id:'node-2',
-      expanded:true,
-      children:[
-          {
-              label:'vite',
-              id:'node-2-1',
-              expanded:true,
-              children:[
-                  {
-                      label:'README.md',
-                      id:'node-2-1-1',
-                      expanded:true,
-                  }
-              ]
-          },
-      ]
-  },
-  {
-      label:'ReadMe',
-      id:'node-3',
-      expanded:true
-  }
-]
+  [...Array.from({length:100}).map((_,index)=>{
+   return {
+     id:'node'+index,
+     label:'node'+index
+    }
+  })]
 )
-
 </script>

@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.s-virtual-list{
+    &_continer {
+        overflow: auto;
+        position: relative;
+        height: 100%;
+    }
+
+    &_blank {
+        /* border: 3px solid purple; */
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+
+    /* & {
+        border: 3px solid green;
+        transform: translate3d(0,
+                0,
+                0);
+    } */
+}
+

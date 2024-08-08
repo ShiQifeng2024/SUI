@@ -46,6 +46,7 @@ export default defineComponent({
         isShow.value = true
       }
     }
+
     return () => {
       return (
         <div
@@ -75,7 +76,7 @@ export default defineComponent({
           )}
 
           <div
-            class="s-tree__node--content"
+            class="s-tree-node--content"
             draggable={!!props.dragdrop}
             {...dragdropProps}
           >

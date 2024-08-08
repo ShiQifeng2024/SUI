@@ -9,9 +9,9 @@ import {
 import { IInnerTreeNode } from '../tree-types'
 
 const dropTypeMap = {
-  dropPrev: 's-tree_node--drop-prev',
-  dropNext: 's-tree_node--drop-next',
-  dropInner: 's-tree_node--drop-inner'
+  dropPrev: 's-tree-node--drop-prev',
+  dropNext: 's-tree-node--drop-next',
+  dropInner: 's-tree-node--drop-inner'
 }
 
 export function useDragDrop(
@@ -19,7 +19,6 @@ export function useDragDrop(
   data: Ref<IInnerTreeNode[]>,
   { getChildren, getParent }: IUseCore
 ): IUseDragdrop {
-  console.log('in fun')
   const dragState = reactive<DragState>({
     dropType: undefined,
     draggingNode: undefined,
@@ -37,9 +36,14 @@ export function useDragDrop(
       )
     }
   )
-
+  const removeDraggingStyle = (target: HTMLElement | null) => {
+    target?.classList.remove(...Object.values(dropTypeMap))
+  }
+  const resetDragState = () => {
+    console.log('resetDragState')
+  }
   const onDragstart = (event: DragEvent, treeNode: IInnerTreeNode): void => {
-    console.log('in23')
+    // console.log('in23')
     event.stopPropagation()
     dragState.draggingNode = event.target as HTMLElement | null
     dragState.draggingTreeNode = treeNode
@@ -63,7 +67,7 @@ export function useDragDrop(
     event.preventDefault()
     event.stopPropagation()
     // removeDraggingStyle(event.currentTargetasHTMLElement | null)
-    console.log('in')
+    // console.log('in')
     if (!dragState.draggingNode || !dragDrop) return
 
     const dragNodeId = event.dataTransfer?.getData('dragNodeId')
@@ -76,7 +80,7 @@ export function useDragDrop(
         handleDrop(dragNodeId, dropNode)
       }
 
-      // resetDragState()
+      resetDragState()
     }
   }
 
@@ -192,23 +196,29 @@ export function useDragDrop(
         const classList = currentTarget?.classList
         if (classList) {
           if (!classList.contains(dropTypeMap[innerDropType])) {
-            // removeDraggingStyle(currentTarget)
-            // classList.add(dropTypeMap[innerDropType])
+            removeDraggingStyle(currentTarget)
+            classList.add(dropTypeMap[innerDropType])
           }
         }
       } else {
-        // removeDraggingStyle(currentTarget)
+        removeDraggingStyle(currentTarget)
       }
       dragState.dropType = innerDropType
     }
   }
 
-  const onDragleave = () => {
-    console.log(1)
+  const onDragleave = (event: DragEvent) => {
+    event.stopPropagation()
+    if (!dragState.draggingNode) {
+      return
+    }
+    removeDraggingStyle(event.currentTarget as HTMLElement | null)
   }
 
-  const onDragend = () => {
-    console.log(1)
+  const onDragend = (event: DragEvent) => {
+    event.preventDefault()
+    event.stopPropagation()
+    resetDragState()
   }
 
   return {

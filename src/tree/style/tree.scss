@@ -2,12 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-.s-tree{
-   
-    }
+.s-tree {}
 
-.s-tree-node{
+.s-tree-node {
     display: flex;
     align-items: center;
+
+    &--content {
+        border: 1px solid transparent;
+    }
+
+    &--drop-inner {
+        border: 1px solid silver;
+    }
+
+    &--drop-next {
+        border-bottom: 1px solid silver;
+    }
+
+    &--drop-prev {
+        border-top: 1px solid silver;
+    }
 
 }
