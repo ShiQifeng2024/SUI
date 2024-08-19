@@ -1,0 +1,9 @@
+.s-base-modal,.s-base-modal__mask{
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+}
+.s-base-modal__mask{
+    background-color: rgba(0,0,0,.5);
+    z-index: -1;
+}
