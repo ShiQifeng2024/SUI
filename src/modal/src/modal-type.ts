@@ -10,16 +10,24 @@ export const modalProps = {
     default: ''
   },
   width: {
-    type: Number,
-    default: 500
+    type: String,
+    default: '30%'
   },
   height: {
     type: Number,
     default: 300
   },
+  center: {
+    type: Boolean,
+    default: false
+  },
   showClose: {
     type: Boolean,
     default: true
+  },
+  alignCenter: {
+    type: Boolean,
+    default: false
   }
 } as const
 

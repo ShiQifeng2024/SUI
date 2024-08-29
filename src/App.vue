@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import virtualList from './components/virtualList.vue'
 import SbaseModal from './modal/src/base-modal.tsx'
+import SPopover from './popover/popover.tsx'
 import { ref } from 'vue'
 const open = () => {
-  modelVisible.value = true
+  modelVisible.value = !modelVisible.value
 }
+const host = ref()
 const modelVisible = ref(false)
 </script>
 
@@ -18,7 +20,7 @@ const modelVisible = ref(false)
     <span style="color: red">元旦快乐</span>
   </SButton> -->
   <!-- <virtualList></virtualList> -->
-  <button @click="open">打开</button>
+  <!-- <button @click="open">打开</button>
   <SbaseModal v-model="modelVisible">
     <div
       style="
@@ -33,22 +35,16 @@ const modelVisible = ref(false)
         alt=""
       />
     </div>
-  </SbaseModal>
+  </SbaseModal> -->
+  <div ref="host" style="width: 50px; margin: 0 auto" @click="open">打开</div>
+  <SPopover
+    v-model="modelVisible"
+    :host="host"
+    show-arrow
+    :placement="`right-start`"
+  >
+    Overlay
+  </SPopover>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+<style scoped></style>
