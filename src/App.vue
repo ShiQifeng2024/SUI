@@ -3,11 +3,32 @@ import virtualList from './components/virtualList.vue'
 import SbaseModal from './modal/src/base-modal.tsx'
 import SPopover from './popover/popover.tsx'
 import { ref } from 'vue'
-const open = () => {
-  modelVisible.value = !modelVisible.value
+import { Table, Column } from './table'
+import { Button } from './button'
+// const open = () => {
+//   modelVisible.value = !modelVisible.value
+// }
+// const host = ref()
+// const modelVisible = ref(false)
+const tableData = ref([
+  {
+    date: '2016-05-03',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+    checked: true
+  },
+  {
+    date: '2016-05-02',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles'
+  }
+])
+const editRow = (row: any) => {
+  console.log('rowData', row)
 }
-const host = ref()
-const modelVisible = ref(false)
+const handleSelectionChange = (rows: any) => {
+  console.log('rows', rows)
+}
 </script>
 
 <template>
@@ -36,15 +57,33 @@ const modelVisible = ref(false)
       />
     </div>
   </SbaseModal> -->
-  <div ref="host" style="width: 50px; margin: 0 auto" @click="open">打开</div>
+  <!-- <div ref="host" style="width: 50px; margin: 0 auto" @click="open">打开</div>
   <SPopover
     v-model="modelVisible"
     :host="host"
     show-arrow
-    :placement="`right-start`"
   >
     Overlay
-  </SPopover>
+  </SPopover> -->
+  <div style="padding: 10px">
+    <Table :data="tableData" @selection-change="handleSelectionChange">
+      <Column type="selection"></Column>
+      <Column field="date" header="Date"></Column>
+      <Column field="name" header="Name"></Column>
+      <Column field="address" header="Address"></Column>
+      <Column header="edit">
+        <template #default="scope">
+          <Button @click="editRow(scope)">编辑</Button>
+          <Button>新增</Button>
+        </template>
+      </Column>
+    </Table>
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+* {
+  margin: 0;
+  padding: 0;
+}
+</style>

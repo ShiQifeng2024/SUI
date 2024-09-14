@@ -7,7 +7,13 @@ import {
   watch,
   nextTick
 } from 'vue'
-import { computePosition, arrow, offset, Middleware } from '@floating-ui/dom'
+import {
+  computePosition,
+  arrow,
+  offset,
+  Middleware,
+  autoPlacement
+} from '@floating-ui/dom'
 import './base-popover.scss'
 export default defineComponent({
   name: 'SBasesPopover',
@@ -47,9 +53,14 @@ export default defineComponent({
         middleware.push(arrow({ element: arrowRef.value }))
       }
 
+      //如果用户没有制定placement，则使用autoPlacement
+      if (!placement.value) {
+        middleware.push(autoPlacement())
+      }
+
       computePosition(hostRef.value, overLayRef.value, {
         middleware: middleware,
-        placement: placement.value
+        placement: placement.value || 'bottom'
       }).then(({ x, y, middlewareData, placement }) => {
         Object.assign(overLayRef.value.style, {
           left: x + 'px',
@@ -71,13 +82,13 @@ export default defineComponent({
           const prevIdx = SIDE.indexOf(currentSide) - 1
           const nextSide = SIDE[prevIdx >= 0 ? prevIdx : SIDE.length - 1]
 
-          console.log(arrowX, arrowY, '123', {
-            left: arrowX + 'px',
-            top: arrowY + 'px',
-            [staticSide!]: '-4px',
-            [`border-${currentSide}-color`]: 'transparent',
-            [`border-${nextSide}-color`]: 'transparent'
-          })
+          // console.log(arrowX, arrowY, '123', {
+          //   left: arrowX + 'px',
+          //   top: arrowY + 'px',
+          //   [staticSide!]: '-4px',
+          //   [`border-${currentSide}-color`]: 'transparent',
+          //   [`border-${nextSide}-color`]: 'transparent'
+          // })
           // 箭头位置
           Object.assign(arrowRef.value.style, {
             left: arrowX + 'px',
@@ -89,20 +100,41 @@ export default defineComponent({
         }
       })
     }
+    //创建 MutationObserver 监听宿主元素的变化
+    const mutationObserver = new MutationObserver(entries => updatePosition)
+    const wrapfn = () => {
+      updatePosition()
+    }
     watch(
       modelValue,
       newValue => {
         // console.log('newValue',newValue)
+
         if (newValue) {
           nextTick(() => {
             updatePosition()
+            //监听两个事件和宿主元素
+            hostRef.value &&
+              mutationObserver.observe(hostRef.value, { attributes: true })
+            window.addEventListener('resize', wrapfn)
+            window.addEventListener('scroll', wrapfn)
           })
+        } else {
+          mutationObserver.disconnect()
+          window.removeEventListener('resize', wrapfn)
+          window.removeEventListener('scroll', wrapfn)
         }
       },
       {
         immediate: true
       }
     )
+    onMounted(() => {
+      // console.log('onMounted')
+      mutationObserver.disconnect()
+      window.removeEventListener('resize', updatePosition)
+      window.removeEventListener('scroll', updatePosition)
+    })
     return () => (
       <>
         {modelValue.value && (
